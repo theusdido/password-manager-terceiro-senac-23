@@ -24,3 +24,25 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.campo-erro
+{
+    --background: #ffd4d4;
+    --highlight-background:transparent;
+    border-bottom: 2px solid #FF0000;    
+}
+
+ion-toolbar{
+    --background:#00002e;
+    --color:#FFF;
+}
+
+ion-title{
+    font-size:14px;
+}
+
+.icone-cadeado{
+    margin:2rem;
+    width:75px;
+}

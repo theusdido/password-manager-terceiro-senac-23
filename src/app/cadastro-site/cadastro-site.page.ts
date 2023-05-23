@@ -26,8 +26,13 @@ export class CadastroSitePage implements OnInit {
   public dados:Array<Credencial> = [];
   public type_senha:string = 'password';
   public icon_senha:string = 'eye';
+  public erro_site = '';
+  public erro_login = '';
+  public erro_senha = '';
+  public campo_error = '';
 
   isAlertOpen = false;
+  alert_validar = false;
   public alertButtons = ['OK'];
   constructor(
     public activated_route:ActivatedRoute
@@ -43,6 +48,28 @@ export class CadastroSitePage implements OnInit {
   }
 
   salvar() {
+    this.erro_site  = '';
+    this.erro_login = '';
+    this.erro_senha = '';
+
+    if (this.site == ''){
+      this.setOpenValidar('site');
+      this.erro_site = 'campo-erro';
+      return;
+    }
+
+    if (this.login == ''){
+      this.setOpenValidar('login');
+      this.erro_login = 'campo-erro';
+      return;
+    }
+
+    if (this.senha == ''){
+      this.setOpenValidar('senha');
+      this.erro_senha = 'campo-erro';
+      return;
+    }
+
     // Código para criptografar a senha
     // Usando Base64    
     let credencial:Credencial = {
@@ -84,4 +111,11 @@ export class CadastroSitePage implements OnInit {
     this.isAlertOpen = isOpen;
   }
 
+  setOpenValidar(campo:string){
+    this.alert_validar = true;
+    this.campo_error = campo;
+  }
+  setCloseValidar(){
+    this.alert_validar = false;
+  }
 }
