@@ -10,4 +10,12 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'cadastro-site',
+    loadComponent: () => import('./cadastro-site/cadastro-site.page').then( m => m.CadastroSitePage)
+  },
+  {
+    path: 'listar-site',
+    loadComponent: () => import('./listar-site/listar-site.page').then( m => m.ListarSitePage)
+  },  
 ];

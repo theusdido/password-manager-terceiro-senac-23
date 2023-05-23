@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>cadastro-site</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">cadastro-site</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div style="display:flex;justify-content:center">
+    <ion-img
+      src="https://cdn-icons-png.flaticon.com/512/181/181534.png"
+      alt="Ícone de um cadeado"
+      style="width:100px;"
+    ></ion-img>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Site</ion-label>
+      <ion-input [(ngModel)]="site" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Login</ion-label>
+      <ion-input [(ngModel)]="login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input type="{{ type_senha }}" [(ngModel)]="senha"></ion-input>
+      <ion-button fill="clear" (click)="showSenha()">
+        <ion-icon name="{{ icon_senha }}"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="salvar()">Salvar</ion-button>
+  <ion-button expand="block" (click)="limpar()">Limpar</ion-button>
+
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    message="Salvo com Sucesso!"
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)"
+  ></ion-alert>
+
+</ion-content>
