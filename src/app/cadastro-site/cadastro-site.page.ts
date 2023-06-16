@@ -75,7 +75,7 @@ export class CadastroSitePage implements OnInit {
       senha:btoa(this.senha)
     };
 
-    this.database.salvar(credencial)
+    this.database.salvar(credencial);
     this.setOpen(true);
     this.limpar();
   } 

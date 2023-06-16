@@ -9,7 +9,10 @@ export class DatabaseService {
   constructor() { }
 
   carregar(){
-    this.dados = JSON.parse(String(localStorage.getItem('dados')));
+    let localstorage = localStorage.getItem('dados');
+    if (localstorage != null){
+      this.dados = JSON.parse(String(localstorage));
+    }    
   }
 
   excluir(indice:number){
