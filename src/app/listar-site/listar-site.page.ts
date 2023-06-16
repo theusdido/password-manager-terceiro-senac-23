@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Credencial } from '../cadastro-site/cadastro-site.page';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-listar-site',
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ListarSitePage implements OnInit {
 
-  public dados:Array<Credencial> = [];
+  
   public type_senha:string = 'password';
   public icon_senha:string = 'eye-off';
   public alertButtons = [
@@ -29,18 +29,16 @@ export class ListarSitePage implements OnInit {
       role:true
     },
   ];
+
   constructor(
-    public router:Router
+    public router:Router,
+    public database:DatabaseService
   ) { }
 
   ngOnInit() {
-    this.carregar();
+    this.database.carregar();
   }
-
-  carregar(){
-    this.dados = JSON.parse(String(localStorage.getItem('dados')));
-  }
-
+  
   showSenha(){
     if (this.type_senha == 'password'){
       this.type_senha = 'text';
@@ -56,12 +54,8 @@ export class ListarSitePage implements OnInit {
   }
 
   excluir(evento:any,indice:number){
-
     if (evento.detail.role){
-      // O comando splice exclui um item da Array
-      this.dados.splice(indice,1);
-      // Atualiza a lista no localStorage
-      localStorage.setItem('dados',JSON.stringify(this.dados));
+      this.database.excluir(indice);
     }
   }
 

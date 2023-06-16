@@ -1,6 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title><ion-icon name="lock-closed"></ion-icon>Password Manager</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="database.carregar()">
+        <ion-icon name="sync-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>    
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +14,7 @@
   <ion-accordion-group>
   <ion-accordion 
     value="{{ dado.site }}" 
-    *ngFor="let dado of dados;let indice = index;"
+    *ngFor="let dado of database.dados;let indice = index;"
   >
     <ion-item slot="header" color="light">
       <ion-label>{{ dado.site }}</ion-label>

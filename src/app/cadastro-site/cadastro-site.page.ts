@@ -3,13 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { ListarSitePage } from '../listar-site/listar-site.page';
-
-export interface Credencial {
-  site:string,
-  login:string,
-  senha:string
-}
+import { Credencial } from '../credencial';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-cadastro-site',
@@ -35,10 +30,12 @@ export class CadastroSitePage implements OnInit {
   alert_validar = false;
   public alertButtons = ['OK'];
   constructor(
-    public activated_route:ActivatedRoute
+    public activated_route:ActivatedRoute,
+    public database:DatabaseService
   ) { }
 
   ngOnInit() {
+    this.database.carregar();
     this.activated_route.params
     .subscribe((params:any) => {
       if (params.dados != undefined){
@@ -77,9 +74,10 @@ export class CadastroSitePage implements OnInit {
       login:this.login,
       senha:btoa(this.senha)
     };
-    this.dados.push(credencial);
-    localStorage.setItem('dados',JSON.stringify(this.dados)); 
+
+    this.database.salvar(credencial)
     this.setOpen(true);
+    this.limpar();
   } 
 
   carregar(registro:any){
@@ -90,11 +88,9 @@ export class CadastroSitePage implements OnInit {
   }
 
   limpar(){
-    localStorage.clear();
     this.site   = '';
     this.login  = '';
     this.senha  = '';
-
   }
 
   showSenha(){
